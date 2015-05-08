@@ -9,7 +9,6 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.JobConf;
-import org.apache.hadoop.mapred.Mapper;
 import org.apache.hadoop.mapred.OutputCollector;
 import org.apache.hadoop.mapred.Reducer;
 import org.apache.hadoop.mapred.Reporter;
@@ -49,10 +48,6 @@ public class BlockCrawlReducer implements Reducer<IntWritable, Text, NullWritabl
 			Text tsv = values.next();
 			logger.info(tsv.toString());
 			String[] tokens = tsv.toString().split("\\s+");
-			if (tokens.length != 2) {
-				logger.error("wrong number of tokens: {}", tokens.length);
-				System.exit(1);
-			}
 			String start = tokens[0];
 			String end = tokens[1];
 			while (!start.equals(end)) {
